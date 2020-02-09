@@ -2,6 +2,7 @@ import Phaser from 'phaser'
 import Preload from "./scenes/Preload";
 import Create from "./scenes/Create";
 import Socket from "./config/Socket";
+import './styles/styles.scss'
 
 // setup socket.io
 Socket(this)
