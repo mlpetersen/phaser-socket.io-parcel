@@ -1,19 +1,29 @@
 import Phaser from 'phaser'
-import io from "socket.io-client";
+import Preload from "./scenes/Preload";
+import Create from "./scenes/Create";
+import Socket from "./config/Socket";
 
-const socket = io('http://0.0.0.0:4001');
-
-socket.on("test", function(data) {
-  console.error("test", data);
-});
-
-socket.on("test2", function(data) {
-  console.error("test2", data);
-});
+// setup socket.io
+Socket(this)
 
 new Phaser.Game({
+  title: 'Parcel Socket.io Phaser',
+  url: 'https://sumo.yoga',
+  version: '0.1',
+  banner: {
+    hidePhaser: true,
+  },
+  type: Phaser.AUTO,
   width: 800,
-  height: 400,
+  height: 600,
+  physics: {
+    default: 'arcade',
+    arcade: {
+      debug: false,
+      gravity: {
+        y: 200,
+      },
+    },
+  },
+  scene: [Preload, Create]
 })
-
-console.error('hep!!')
