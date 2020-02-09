@@ -1,11 +1,17 @@
 const express = require('express')
 const http = require('http')
 const socketIO = require('socket.io')
+const env = process.env.NODE_ENV
 
 // our localhost port
-const port = 4001
+let port = 4001
 
 const app = express()
+
+if (env === 'production') {
+  port = 1337
+  app.use(express.static(__dirname + '/dist'))
+}
 
 // our server instance
 const server = http.createServer(app)

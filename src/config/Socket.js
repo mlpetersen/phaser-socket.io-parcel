@@ -1,8 +1,16 @@
 import io from 'socket.io-client'
 
+let socket
+const env = process.env.NODE_ENV
+
 export default function setupSocket(game) {
   const g = game
-  const socket = io('http://0.0.0.0:4001')
+
+  if (env === 'production') {
+    socket = io()
+  } else {
+    socket = io('http://0.0.0.0:4001')
+  }
 
   socket.on('you-are-connected', function() {
     console.error('You are connected!')
