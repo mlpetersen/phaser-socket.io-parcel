@@ -14,7 +14,7 @@ For the client, run:
 
 `npm run dev-client`
 
-The client runs Parcel on port 1337, with hot-reload, and will connect Socekt.io to port 4001.
+The client runs Parcel on port 1337, with hot-reload, and will connect Socket.io to port 4001.
 
 To run the game, open your browser and enter http://localhost:1337 into the address bar.
 
