@@ -1,7 +1,18 @@
 const express = require('express')
 const http = require('http')
-const socketIO = require('socket.io')
 const env = process.env.NODE_ENV
+
+const WebSocketServer = require('ws').Server
+const wss = new WebSocketServer({ port: 40510 })
+
+wss.on('connection', function(ws) {
+  ws.on('message', function(message) {
+    console.log('received: %s', message)
+  })
+
+  // notify player that they connected
+  ws.send('you are connected')
+})
 
 // our localhost port
 let port = 4001
@@ -15,24 +26,5 @@ if (env === 'production') {
 
 // our server instance
 const server = http.createServer(app)
-
-// This creates our socket using the instance of the server
-const io = socketIO(server)
-
-// This is what the socket.io syntax is like, we will work this later
-io.on('connection', socket => {
-  console.log('User connected')
-
-  // notify player that they connected
-  socket.emit('you-are-connected')
-
-  // notify all other players that player connected
-  socket.broadcast.emit('someone-else-connected')
-
-  socket.on('disconnect', () => {
-    socket.emit('test', 'user disconnected')
-    console.log('user disconnected')
-  })
-})
 
 server.listen(port, () => console.log(`Listening on port ${port}`))

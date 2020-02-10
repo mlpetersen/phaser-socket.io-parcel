@@ -1,11 +1,10 @@
 import Phaser from 'phaser'
-import Preload from "./scenes/Preload";
-import Create from "./scenes/Create";
-import Socket from "./config/Socket";
+import Preload from './scenes/Preload'
+import Create from './scenes/Create'
+import WebSocket from './config/WebSocket'
 import './styles/styles.scss'
 
-// setup socket.io
-Socket(this)
+WebSocket(this)
 
 new Phaser.Game({
   title: 'Parcel Socket.io Phaser',
@@ -26,5 +25,5 @@ new Phaser.Game({
       },
     },
   },
-  scene: [Preload, Create]
+  scene: [Preload, Create],
 })
